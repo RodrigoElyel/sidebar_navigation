@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:sidebar_navigation/bloc.navigation_bloc/navigation_bloc.dart';
 import 'menu_item.dart';
 
 class SideBar extends StatefulWidget {
@@ -108,19 +110,39 @@ class _SideBarState extends State<SideBar>
                         ),
                         MenuItem(
                           icon: Icons.home,
-                          title: "home",
+                          title: "Home",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.HomePageClickEvent);
+                          },
                         ),
                         MenuItem(
                           icon: Icons.person,
                           title: "My Account",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.MyAccountClickedEvent);
+                          },
                         ),
                         MenuItem(
                           icon: Icons.shopping_basket,
                           title: "My Orders",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.MyOrdersClickedEvent);
+                          },
                         ),
                         MenuItem(
                           icon: Icons.card_giftcard,
                           title: "Wishlist",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.HomePageClickEvent);
+                          },
                         ),
                         Divider(
                           height: 64,
@@ -171,7 +193,7 @@ class _SideBarState extends State<SideBar>
   }
 }
 
-class CustomMenuClipper extends CustomClipper<Path>{
+class CustomMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     // TODO: implement getClip
@@ -184,10 +206,9 @@ class CustomMenuClipper extends CustomClipper<Path>{
     Path path = Path();
     path.moveTo(0, 0);
     path.quadraticBezierTo(0, 8, 10, 16);
-    path.quadraticBezierTo(width-1, height/2 - 20, width, height/2);
-    path.quadraticBezierTo(width+1, height/2 + 20, 10, height-16);
-    path.quadraticBezierTo(0, height-8, 0, height);
-
+    path.quadraticBezierTo(width - 1, height / 2 - 20, width, height / 2);
+    path.quadraticBezierTo(width + 1, height / 2 + 20, 10, height - 16);
+    path.quadraticBezierTo(0, height - 8, 0, height);
 
     path.close();
 
@@ -199,7 +220,6 @@ class CustomMenuClipper extends CustomClipper<Path>{
     // TODO: implement shouldReclip
     return true;
   }
-
 }
 
 //
